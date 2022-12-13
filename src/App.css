@@ -1,0 +1,555 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: rgb(5, 5, 5);
+}
+
+/* ******************************* loader ******************************* */
+.displayMovie{
+  min-height: 100vh ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.loader {
+  position: absolute;
+  top: 30%;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ************************************** Navbar *********************************** */
+
+.app {
+  height: 100%;
+  width: 100%;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 50px;
+  width: 100%;
+  background-color: #383c40;
+  color: #fff;
+  z-index: 999;
+  gap: 50px;
+  text-align: center;
+}
+.hamburgerMenu{
+  display: none;
+}
+.navbar .navbarItems{
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  gap: 50px;
+  text-align: center;
+}
+.logo {
+  text-decoration: none;
+  color: #fff;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.liItem {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.dropdown {
+  display: none !important;
+  margin-top: 18px;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  -webkit-box-shadow: 1px 5px 21px 1px rgba(0,0,0,0.53);
+-moz-box-shadow: 1px 5px 21px 1px rgba(0,0,0,0.53);
+box-shadow: 1px 5px 21px 1px rgba(0,0,0,0.53);
+}
+
+.activeBar .dropdown {
+  display: flex !important;
+}
+.activeBar i{
+  transform: rotate(-90deg);
+  transition: all 0.5s ease-in-out;
+}
+i{
+  transition: all 0.5s ease-in-out;
+}
+
+.navbar li {
+  padding: 5px 20px 10px 20px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.activeBar {
+  padding: 5px 20px 10px 20px;
+  position: relative;
+}
+
+.navbar .dropdown {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  background-color: white;
+  gap: 5px;
+  left: -0px;
+  width: max-content;
+}
+
+.dropdown .dropdownLi {
+  text-decoration: none;
+  color: #000;
+  padding: 5px 50px 5px 5px;
+
+}
+
+.dropdown .dropdownLi:hover {
+  background-color: rgb(197, 56, 56);
+  width: 100%;
+  color: #fff;
+  text-align: left;
+}
+.searchBox {
+  background: #2f3640;
+  height: 40px;
+  border-radius: 40px;
+}
+
+.searchBox:hover > .searchInput {
+  width: 240px;
+  padding: 0 6px;
+}
+
+.searchBox:hover > .searchButton {
+background: white;
+color : #2f3640;
+}
+
+.searchButton {
+  position: relative;
+  color: white;
+  text-decoration: none;
+  float: right;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #383c40;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.4s;
+  border: #fff 1px solid;
+}
+.searchButton i {
+  font-size: 0.8rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+}
+
+.searchInput {
+  border:none;
+  background: none;
+  outline:none;
+  float:left;
+  padding: 0;
+  color: white;
+  font-size: 16px;
+  transition: 0.4s;
+  line-height: 40px;
+  width: 0px;
+
+}
+
+/*********************** Home Page ****************** */
+.homePage, .genrePage , .yearPage, .randomMoviePage , .bestPage{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 100px;
+  margin: 0 10%;
+}
+.homePage .cardContainer, .genrePage .cardContainer , .yearPage .cardContainer , .randomMoviePage .cardContainer , .bestPage .cardContainer{
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+  
+}
+.homePage .otherPages, .genrePage .otherPages , .yearPage .otherPages, .randomMoviePage .otherPages, .bestPage .otherPages{
+
+  margin: 5% 6% 3% 6%;
+}
+.movieCard{
+  text-decoration: none;
+  color: #fff;
+  position: relative;
+}
+.opacityZero {
+  opacity: 0;
+}
+
+.movieImg {
+  width: 230px;
+  height: 330px;
+  border-radius: 10px;
+}
+.cardDescription{
+  display: none;
+}
+.movieCard:hover .cardTitle{
+  padding: 20% 10px 20px 10px;
+  background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.509625350140056) 100%, rgba(0,212,255,0) 100%, rgba(0,0,0,0) 100%);
+transition: all 0.5s ease-in !important;
+overflow: hidden;
+
+}
+.cardDescription::-webkit-scrollbar-track{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+.cardDescription::-webkit-scrollbar{
+  width: 12px;
+	background-color: #F5F5F5;
+}
+.cardDescription::-webkit-scrollbar-thumb{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
+}
+.movieCard:hover .cardDescription{
+display: inline-block;
+opacity: 0.5;
+overflow-y: auto;
+max-height: 200px;
+transition: all 20s ease-in !important;
+
+}
+
+.cardTitle {
+  position: absolute;
+  bottom: 0;
+  width: 230px;
+  word-wrap: break-word !important;
+  height: 100%;
+  padding-top: 120%;
+  background: rgb(0,0,0);
+  background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.509625350140056) 35%, rgba(0,212,255,0) 100%, rgba(0,0,0,0) 100%);
+  padding: 115% 10px 20px 10px;
+  border-radius: 10px;
+}
+.cardTitle li{
+  color: #fff;
+  list-style: none;
+}
+.cardTitle .cardHeader{
+  font-weight: 700;
+}
+.cardDate{
+  opacity: 0.6;
+}
+
+.cardScore{
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  padding: 5px;
+  min-width: 26px;
+  text-align: center;
+  background-color: #b38b14;
+  color: #fff !important;
+  border-radius: 50%;
+}
+.otherPageLeftArrow , .otherPageRightArrow{
+  cursor: pointer;
+  font-size: 1.2rem;
+  
+  }
+.otherPages{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.otherPages i{
+  color: #fff;
+}
+.otherPages i:hover{
+  transform: scale(1.2);
+}
+.otherPages .changePage{
+  text-decoration: none;
+  color: #000;
+  font-size: 1.2rem;
+  background-color: #f1f1f1;
+  text-align: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 5px;
+  border-radius: 50%;
+}
+.changePage.active{
+  background-color: #b38b14;
+  color: #fff;
+}
+/****************** movie detail page ***********************/
+.movieDetailPage {
+  display: flex;
+  position: relative;
+  top: 40px;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+  color: #fff;
+}
+
+.movie-info {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding-top: 50px;
+  padding: 50px 10% 50px 10%;
+  background-position: center;
+  background-blend-mode: color;
+  background-repeat: no-repeat;
+  background-size: cover;  
+  background-color: rgba(3,37,65, 0.8);
+}
+.movieDetailPage .movie-info .movie-detail-img {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  margin: 0 10%;
+}
+
+.movie-detail-img .movieHomePage {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px 0;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.13);
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(7.3px);
+-webkit-backdrop-filter: blur(7.3px);
+border: 1px solid rgba(255, 255, 255, 0.45);
+}
+.movieHomePage:hover{
+  background: rgba(255, 255, 255, 0.59);
+  color: #fff;
+  transition: all 0.5s ease-in;
+}
+.movie-info .movie-info-text{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 50px;
+  align-items: flex-start;
+  width: 100% !important;
+}
+.movieOverview{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: #fff;
+}
+.movieScore{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  position: relative;
+  width: 100%;
+}
+.movieScore .scoreLabel{
+  font-weight: 700;
+  background-color: #fff;
+  color: #fff;
+  border-radius: 0.2rem;
+  padding: 5px 12px;  
+}
+.movieImdb{
+  margin-top: 0.5rem;
+}
+.movieImdb a{
+  font-weight: 900;
+  background-color: #fff;
+  border-radius: 0.3rem;
+  padding: 8px 18px;  
+  text-decoration: none;
+  color: #000;
+}
+.movieImdb:hover a{
+  background-color: #b38b14;
+  color: #f1f1f1;
+  transition: all 0.5s ease-in;
+}
+.movieGenres {
+  display: flex;
+  gap: 10px;
+  justify-content: space-around;
+}
+.movieOverview{
+  color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+}
+.movie-info-text div span{
+  min-width: 50px !important;
+  display: inline-block;
+}
+.movieGenre ,.movieYearLink{
+  color: #fff;
+  text-decoration: none;
+  padding: 3px 8px;
+  border-radius: 5px;
+}
+.movieGenre:hover ,.movieYearLink:hover {
+  color: #000;
+  background-color: #fff;
+  transition: all 0.3s ease-in
+}
+ /************************** Movie Cast Component ****************************** */
+.MovieCast{
+  width: 100%;
+  z-index: 10;
+  padding: 80px 10% 50px 10%;
+}
+.castRealName, .castCharacterName{
+  width: 200px;
+  color: #fff;
+}
+.castRealName{
+  font-size: 1rem;
+  font-weight: 400;
+
+}
+.castCharacterName{
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.castLink{
+  text-decoration: none;
+
+}
+
+/* *********************************** Movie Video Component  ************************** */
+.movieVideo{
+  color: #fff;
+  padding: 0 10%;
+  overflow: hidden;
+}
+.swiper-slide{
+  width: 400px !important;
+  margin-right: 20px;
+}
+
+
+@media screen and (max-width : 1023px){
+  .movie-info {
+    flex-direction: column;
+  }
+  .navbar{
+    gap: 30%;
+    justify-content: space-between;
+    padding: 0 5%;
+  }
+.hamburgerMenu ~ .navbarItems{
+  display: none;
+}
+.dropdown {
+  margin-top: 0;
+ gap: 0 !important;
+}
+.activeBar{
+  width: fit-content;
+  right:  0 ;
+
+}
+.hamburgerMenu{
+  display: inline-block ;
+  cursor: pointer;
+  padding: 17px;
+}
+.hamburgerMenu.active {
+  background-color: #383c40;
+  padding: 17px;
+}
+.navbarItems a {
+  display: block !important;
+  margin-top: 10px;
+} 
+.navbarItems li{
+  padding: 10px 0 0 0;
+  text-align: left;
+  margin-right: 0;
+  padding-left: 0px;
+}
+.hamburgerMenu.active ~ .navbarItems {
+  display: block !important;
+  width: 100%;
+  position: absolute;
+  background-color: #383c40;
+  top: 50px ;
+  padding: 10px 50px;
+  right:  0 !important;
+  text-align: left;
+}.searchBox:hover > .searchInput {
+  width: 150px;
+  padding: 0 6px;
+}
+.searchBox{
+  margin-top: 20px;
+}
+.searchButton{
+  margin-top: 0 !important;
+}
+  
+}
